@@ -37,7 +37,9 @@ class Landing extends Component {
           </div>
         </Navbar>
         <Home checkingAccounts={this.state.checkingAccounts}
+        // Need to pass onAccountSelect to the Home components
           onClick={(accountId) => this.onAccountSelect(accountId)} /> 
+          {/* We are passing the first element [0] of the below subarray (.filter returns subarray) to AccountDetail: */}
         <AccountDetail account={this.state.checkingAccounts.filter((account) => account.accountNumber === this.state.selectedAccount)[0]} />
       </div>
     );
