@@ -30,12 +30,12 @@ import AccountDetail from './AccountDetail';
 function RenderHomeAccounts({ account, onClick }) {
     return (
         <Card onClick={() => onClick(account.accountNumber)}>
-            <CardImgOverlay>
+            {/* <CardImgOverlay> */}
                 <CardBody>
                     <CardTitle>Personal Checking: </CardTitle>
                     <CardText>  (xxxx000{account.accountNumber}) </CardText>
                 </CardBody>
-            </CardImgOverlay>
+            {/* </CardImgOverlay> */}
         </Card>
     )
 }
@@ -44,7 +44,7 @@ function RenderHomeAccounts({ account, onClick }) {
 const Home = (props) => {
     const home = props.checkingAccounts.map((account) => {
         return (
-            <div key={account.accountNumber} className="col-12 col-md-5 m-5">
+            <div key={account.accountNumber} className="col-12 col-md-5 m-1">
                 <RenderHomeAccounts account={account} onClick={props.onClick} />
             </div>
         );
@@ -55,11 +55,6 @@ const Home = (props) => {
         <div className="container" >
             <div className="row">
                 {home}
-            </div>
-            <div className="row">
-                {/* <div className="col-12 col-md-5 m-5">
-                            <AccountDetail selectedAccount={this.state.selectedAccount} />
-                        </div> */}
             </div>
         </div>
     );

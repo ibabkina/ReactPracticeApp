@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import Home from './Home';
 import { ACCOUNT_HOLDERS } from '../shared/accountHolders';
 import AccountDetail from './AccountDetail';
@@ -31,16 +32,13 @@ class Landing extends Component {
   render() {
     return (
       <div>
-        <Navbar dark color="primary">
-          <div className="container">
-            <NavbarBrand href="/">Merit Bank</NavbarBrand>
-          </div>
-        </Navbar>
+        <Header />
         <Home checkingAccounts={this.state.checkingAccounts}
         // Need to pass onAccountSelect to the Home components
           onClick={(accountId) => this.onAccountSelect(accountId)} /> 
           {/* We are passing the first element [0] of the below subarray (.filter returns subarray) to AccountDetail: */}
-        <AccountDetail account={this.state.checkingAccounts.filter((account) => account.accountNumber === this.state.selectedAccount)[0]} />
+        <AccountDetail selectedAccount={this.state.checkingAccounts.filter((account) => account.accountNumber === this.state.selectedAccount)[0]} />
+        <Footer />
       </div>
     );
   }

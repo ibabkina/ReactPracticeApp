@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Landing from './pages/Landing';
+import './App.css';
+import { BrowserRouter } from 'react-router-dom';
 // import { ACCOUNT_HOLDERS } from './shared/accountHolders';
 // import Home from './pages/Home';
 
@@ -16,10 +18,12 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Landing />
-        {/* <Home checkingAccounts={this.state.checkingAccounts} /> */}
-      </div>
+      <BrowserRouter>
+        <div>
+          <Landing />
+          {/* <Home checkingAccounts={this.state.checkingAccounts} /> */}
+        </div>
+      </BrowserRouter>
     );
   }
 }
