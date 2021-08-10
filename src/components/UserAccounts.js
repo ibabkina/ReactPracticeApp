@@ -1,16 +1,18 @@
 // import React, { Component } from 'react';
-import { Card, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
-import AccountDetail from '../pages/AccountDetail';
+import { Card, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+// import AccountDetail from '../pages/AccountDetail';
+// to pass the information to my component when it clicked:
+import { Link } from 'react-router-dom';
 
 //Restructured in functional component
 // class Home extends Component {
-    // constructor(props) {
-    //     super(props);
+// constructor(props) {
+//     super(props);
 
-        // this.state = {
-        //     selectedAccount: null
-        // }
-    // }
+// this.state = {
+//     selectedAccount: null
+// }
+// }
 
 // onAccountSelect(account) {
 //     this.setState({ selectedAccount: account });
@@ -27,32 +29,50 @@ import AccountDetail from '../pages/AccountDetail';
 // render() {
 
 //Define a functional component 
-function RenderHomeAccounts({ account, onClick }) {
+function RenderAccountItem({ account, onClick }) {
+    // console.log("accounts to render are : " + account.accountNumber);
     return (
-        <Card onClick={() => onClick(account.accountNumber)}>
-            {/* <CardImgOverlay> */}
+        // <Card onClick={() => onClick(account.accountNumber)}>
+        <Card>
+            <Link to={`/userAccounts/${account.accountNumber}`} >
+                {/* <CardImgOverlay> */}
                 <CardBody>
                     <CardTitle>Personal Checking: </CardTitle>
                     <CardText>  (xxxx000{account.accountNumber}) </CardText>
                 </CardBody>
-            {/* </CardImgOverlay> */}
+                {/* </CardImgOverlay> */}
+            </Link>
         </Card>
     )
 }
 
 //Another to implement functional component
 const UserAccounts = (props) => {
+    // console.log("in UserAccounts"); 
     const userAccounts = props.checkingAccounts.map((account) => {
         return (
             <div key={account.accountNumber} className="col-12 col-md-5 m-1">
-                <RenderHomeAccounts account={account} onClick={props.onClick} />
+                {/* <RenderAccounts account={account} onClick={props.onClick} /> */}
+                <RenderAccountItem account={account} />
             </div>
         );
     })
-    
-    
+
+
     return (
         <div className="container" >
+            <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
+                    <BreadcrumbItem active>UserAccounts</BreadcrumbItem>
+                </Breadcrumb>
+
+                <div className="col-12">
+                    <h3>Accounts</h3>
+                    {/* //gives a line */}
+                    <hr />
+                </div>
+            </div>
             <div className="row">
                 {userAccounts}
             </div>

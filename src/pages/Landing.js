@@ -3,6 +3,7 @@ import Home from './Home';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import UserAccounts from '../components/UserAccounts';
+import Contact from '../components/Contact';
 import { ACCOUNT_HOLDERS } from '../shared/accountHolders';
 import AccountDetail from './AccountDetail';
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -15,8 +16,9 @@ class Landing extends Component {
     this.state = {
       checkingAccounts: ACCOUNT_HOLDERS[0].checkingAccounts,
       // selectedAccount: null
+      // transactions: transactions
     }
-    console.log(ACCOUNT_HOLDERS[0].checkingAccounts)
+    // console.log(ACCOUNT_HOLDERS[0].checkingAccounts)
   }
 
   // onAccountSelect(accountId) {
@@ -35,9 +37,19 @@ class Landing extends Component {
   render() {
 
     const HomePage = () => {
+      // console.log("in Home"); 
       return (
         <Home />
       )
+    }
+
+      const AccountWithId = ({match}) => {
+      // console.log("in AccountWithId"); //match = " + match.params);
+      return(
+        <AccountDetail account={this.state.checkingAccounts.filter((account) => account.accountNumber === parseInt(match.params.accountId,10))[0]}
+         />
+      )
+
     }
 
     return (
@@ -51,9 +63,11 @@ class Landing extends Component {
         <Switch>
           <Route path="/home" component={HomePage} />
           <Route exact path="/userAccounts" component={() => <UserAccounts checkingAccounts={this.state.checkingAccounts} />} />
-
+          <Route path="/userAccounts/:accountId" component={AccountWithId} />
+          {/* //if you don't need to send props then {Contact} */}
+          <Route exact path='/contactus' component={Contact} />
           {/* If path doesn't match will be redicected to Home - change to Landing!!! */}
-          <Redirect to="/home" />
+          {/* <Redirect to="/home" /> */}
         </Switch>
         <Footer />
       </div>

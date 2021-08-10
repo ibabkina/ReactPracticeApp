@@ -1,6 +1,7 @@
 
 // import React, { Component } from 'react';
-import { Card, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 //Restructured in functional component
 // class AccountDetail extends Component {
@@ -13,6 +14,7 @@ import { Card, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap'
 //     }
 
 function RenderAccount({ account }) {
+    // console.log("account = " +  account.accountNumber);
     return (
         <div className="col-12 col-md-5 m-1">
             <Card key={account.accountNumber}>
@@ -29,18 +31,34 @@ function RenderAccount({ account }) {
 const AccountDetail = (props) => {
     // const selectedAccount = this.props.account;
 
-    if (props.selectedAccount != null) {
+    // if (props.selectedAccount != null) {
+    if (props.account != null) {
+        // console.log("account != null");
 
         return (
             <div className="container" >
                 <div className="row">
-                    <RenderAccount account={props.selectedAccount} />
+                <Breadcrumb>
+                    {/* <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem> */}
+                    <BreadcrumbItem><Link to='/userAccounts'>UserAccounts</Link></BreadcrumbItem>
+                    <BreadcrumbItem active> {props.account.accountNumber}</BreadcrumbItem>
+                </Breadcrumb>
+                <div className="col-12">
+                    <h3>CheckingAccount: {props.account.accountNumber}</h3>
+                    {/* //gives a line */}
+                    <hr />
+                </div>
+            </div>
+                <div className="row">
+                    {/* <RenderAccount account={props.selectedAccount} /> */}
+                    <RenderAccount account={props.account} />
                 </div>
             </div>
         )
     }
 
     else {
+        // console.log("account == null");
         return (
             <div></div>
         )
